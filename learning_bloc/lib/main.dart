@@ -50,34 +50,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Home'),
-        ),
-        body: StreamBuilder<String?>(
-          stream: cubit.stream,
-          builder: (context, snapshot) {
-            final button = TextButton(
-              onPressed: () {
-                cubit.pickRandomName();
-              },
-              child: const Text('pick a Random Name'),
-            );
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return button;
-              case ConnectionState.waiting:
-                return button;
-              case ConnectionState.active:
-                return Column(
-                  children: [
-                    Text(snapshot.data ?? ''),
-                    button,
-                  ],
-                );
-              case ConnectionState.done:
-                return const SizedBox();
-            }
-          },
-        ));
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
+      body: StreamBuilder<String?>(
+        stream: cubit.stream,
+        builder: (context, snapshot) {
+          final button = TextButton(
+            onPressed: () {
+              cubit.pickRandomName();
+            },
+            child: const Text('pick a Random Name'),
+          );
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return button;
+            case ConnectionState.waiting:
+              return button;
+            case ConnectionState.active:
+              return Column(
+                children: [
+                  Text(snapshot.data ?? ''),
+                  button,
+                ],
+              );
+            case ConnectionState.done:
+              return const SizedBox();
+          }
+        },
+      ),
+    );
   }
 }
